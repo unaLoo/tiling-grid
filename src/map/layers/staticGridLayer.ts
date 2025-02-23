@@ -46,12 +46,13 @@ export default class StaticGridLayer implements NHCustomLayerInterface {
 
     async initialize(map: Map, gl: WebGL2RenderingContext) {
 
-        // const tileSize = this.parent.tileControl.tileSize
-        const tileSize = [2, 2] as [number, number]
+        const tileSize = this.parent.tileControl.tileSize
+        // const tileSize = [1,4] as [number, number]
         const templateGridVertex = genTemplate(tileSize)
         console.log(templateGridVertex)
+        this.gridRowColNum.x = tileSize[1] // row -- y
+        this.gridRowColNum.y = tileSize[0] // col -- x
 
-        
         const templateBuffer = scratch.storageBuffer({
             name: 'templateBuffer',
             resource: { arrayRef: scratch.aRef(new Float32Array(templateGridVertex)) }
@@ -108,8 +109,7 @@ export default class StaticGridLayer implements NHCustomLayerInterface {
 
         this.gridSize.x = this.tile.gridSize[0]
         this.gridSize.y = this.tile.gridSize[1]
-        this.gridRowColNum.x = 2
-        this.gridRowColNum.y = 2
+
         this.meterToTile.n = 1.0 / info.mapTile2Meter
         this.baseTilePos.x = info.mapTileCenter[0]
         this.baseTilePos.y = info.mapTileCenter[1]

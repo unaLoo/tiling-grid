@@ -78,7 +78,7 @@ const map = new mapboxgl.Map({
 
 	////////// Layers
 	
-	const tile = tileControl.getTileByID('0-0-0')!
+	const tile = tileControl.getTileByID('2-1-1')!
 	layerGroup.addLayer(new StaticGridLayer({ id: 'grid', tile: tile }))
 	
 	map.on('click', e => {

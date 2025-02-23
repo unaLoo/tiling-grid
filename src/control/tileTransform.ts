@@ -22,8 +22,9 @@ export function lnglat2TileLocalCoord([lng, lat]: [number, number], tileXYZ: [nu
 export function tileToMeter(tileXYZ: [number, number, number], tileYCoordinate = 0) {
 
     const canonical = { x: tileXYZ[0], y: tileXYZ[1], z: tileXYZ[2] }
-    let ycoord
-    canonical.z > 10 ? ycoord = 0 : ycoord = tileYCoordinate
+    // let ycoord
+    // canonical.z > 10 ? ycoord = 0 : ycoord = tileYCoordinate
+    let ycoord = tileYCoordinate
     const EXTENT = 8192;
     const circumferenceAtEquator = 40075017;
     const mercatorY = (canonical.y + ycoord / EXTENT) / (1 << canonical.z);

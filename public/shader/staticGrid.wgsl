@@ -52,7 +52,7 @@ fn vMain(vInput: VertexInput) -> @builtin(position) vec4f {
         templateGridVert[vertIndex * 2], templateGridVert[vertIndex * 2 + 1]
     );
 
-    offsetPosInMeter = offsetPosInMeter * 100.0 * infoBlock.grid_size; // in meter
+    offsetPosInMeter = offsetPosInMeter * 1.0 * infoBlock.grid_size; // in meter
 
     let pos = infoBlock.base_tile_pos + offsetPosInMeter * infoBlock.meter_to_tile;
 
@@ -62,5 +62,5 @@ fn vMain(vInput: VertexInput) -> @builtin(position) vec4f {
 @fragment
 fn fMain() -> @location(0) vec4f{
 
-    return vec4f(1.0, 0.6, 0.6, 0.5);
+    return vec4f(0.4,0.4,0.4, 0.1);
 }
