@@ -4,7 +4,8 @@ import Tile from "./tile";
 import TileManager from "./tileManager";
 import BoundingBox2D from "../util/boundingBox2D";
 import { bbox2DsToGeojson } from "../util/debug";
-import { projConverter, bboxVec4Transform, coordTransform, lnglat2Tile, lnglat2TileLCS, calcTileMatrix, tile2Meter } from "../util/spaceTransform"
+import { projConverter, coordTransform } from "../util/spaceTransform"
+import { point2Tile, lnglat2TileLocalCoord, tileToMeter, calcTileMatrix } from './tileTransform'
 
 ///////////////////////////////////////////////////
 //////////////////// Types ////////////////////////
@@ -136,11 +137,11 @@ export default class NHTileControl implements IControl {
 
         const centerInMeter = tile.tileCenter
         const centerInLngLat = coordTransform(centerInMeter[0], centerInMeter[1])
-        const targetMapTile = lnglat2Tile(centerInLngLat[0], centerInLngLat[1], this.map.transform.zoom)
+        const targetMapTile = point2Tile(centerInLngLat[0], centerInLngLat[1], this.map.transform.zoom)
 
-        const centerInMapTileCoord = lnglat2TileLCS(centerInLngLat[0], centerInLngLat[1], targetMapTile)
-        const tileMatrix = calcTileMatrix(this.map, targetMapTile)
-        const tileToMeter = tile2Meter(targetMapTile, centerInMapTileCoord[1])
+        const centerInMapTileCoord = lnglat2TileLocalCoord(centerInLngLat as [number, number], targetMapTile)
+        const tileMatrix = calcTileMatrix(this.map.transform, targetMapTile)
+        const tileUnitToMeter = tileToMeter(targetMapTile, centerInMapTileCoord[1])
 
         return {
             mapTileCenter: centerInMapTileCoord,
@@ -151,15 +152,15 @@ export default class NHTileControl implements IControl {
 
     getPointRenderInfo(lnglat: [number, number]) {
 
-        const targetMapTile = lnglat2Tile(lnglat[0], lnglat[1], this.map.transform.zoom)
+        const targetMapTile = point2Tile(lnglat[0], lnglat[1], this.map.transform.zoom)
 
-        const centerInMapTileCoord = lnglat2TileLCS(lnglat[0], lnglat[1], targetMapTile)
-        const tileToMeter = tile2Meter(targetMapTile, centerInMapTileCoord[1])
-        const tileMatrix = calcTileMatrix(this.map, targetMapTile)
+        const centerInMapTileCoord = lnglat2TileLocalCoord(lnglat, targetMapTile)
+        const tileUnitToMeter = tileToMeter(targetMapTile, centerInMapTileCoord[1])
+        const tileMatrix = calcTileMatrix(this.map.transform, targetMapTile)
 
         return {
             mapTileCenter: centerInMapTileCoord,
-            mapTile2Meter: tileToMeter,
+            mapTile2Meter: tileUnitToMeter,
             mapTileMatrix: tileMatrix
         }
     }

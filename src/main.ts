@@ -77,8 +77,10 @@ const map = new mapboxgl.Map({
 
 
 	////////// Layers
-	layerGroup.addLayer(new MapTriangleLayer({ id: 'qws', origin: [114.051537, 22.446937] }))
-	layerGroup.addLayer(new GLMapTriangleLayer({ id: '21', origin: [114.045537, 22.446937] }))
+	// layerGroup.addLayer(new MapTriangleLayer({ id: 'qws', origin: [114.051537, 22.446937] }))
+	layerGroup.addLayer(new MapTriangleLayer({ id: 'qwss', origin: [114.051537, 22.446937] }))
+
+	// layerGroup.addLayer(new GLMapTriangleLayer({ id: '21', origin: [114.045537, 22.446937] }))
 
 
 
