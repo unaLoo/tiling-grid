@@ -47,7 +47,7 @@ export default class MapTriangleLayer implements NHCustomLayerInterface {
         this.baseTilePos = scratch.vec2f()
         this.tileMatrix = scratch.mat4f()
 
-        const vertices = [0, 0, -1, -1, 1, 1]
+        const vertices = [0, 0.5, -0.5, -0.5, 0.5, 0.5]
 
         const templateBuffer = scratch.storageBuffer({
             name: 'templateBuffer',

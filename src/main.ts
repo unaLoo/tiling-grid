@@ -9,8 +9,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import NHLayerGroup from './map/NHLayerGroup'
 import NHTileControl from './control/tileControl'
 import MapTriangleLayer from './map/layers/mapTriangleLayer'
-import GLMapTriangleLayer from './map/layers/glMapTriangleLayer'
-import ScreenTriangleLayer from './map/layers/screenTriangleLayer'
+import StaticGridLayer from './map/layers/staticGridLayer'
 
 // DOM Configuration //////////////////////////////////////////////////////////////////////////////////////////////////////
 const root = document.getElementById('app')!
@@ -76,29 +75,25 @@ const map = new mapboxgl.Map({
 	map.addLayer(layerGroup)
 
 
+
 	////////// Layers
-	// layerGroup.addLayer(new MapTriangleLayer({ id: 'qws', origin: [114.051537, 22.446937] }))
-	layerGroup.addLayer(new MapTriangleLayer({ id: 'qwss', origin: [114.051537, 22.446937] }))
-
-	// layerGroup.addLayer(new GLMapTriangleLayer({ id: '21', origin: [114.045537, 22.446937] }))
-
-
-
-
-	// map.setCenter([120.980697, 31.684162])
-	// map.setZoom(18.5)
-
-
-
+	
+	const tile = tileControl.getTileByID('0-0-0')!
+	layerGroup.addLayer(new StaticGridLayer({ id: 'grid', tile: tile }))
+	
 	map.on('click', e => {
 		console.log(e.lngLat)
 	})
+
+	
+	// layerGroup.addLayer(new MapTriangleLayer({ id: 'qwss', origin: [114.051537, 22.446937] }))
+	// map.setCenter([120.980697, 31.684162])
+	// map.setZoom(18.5)
 
 
 	// map.addLayer(new TestingLayer())
 	// Depository.getInstance().setData("MapInstance", map)
 	// setupDom()
-
 
 
 	// map.showTileBoundaries = true

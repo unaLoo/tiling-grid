@@ -145,7 +145,7 @@ export default class NHTileControl implements IControl {
 
         return {
             mapTileCenter: centerInMapTileCoord,
-            mapTile2Meter: tileToMeter,
+            mapTile2Meter: tileUnitToMeter,
             mapTileMatrix: tileMatrix
         }
     }
