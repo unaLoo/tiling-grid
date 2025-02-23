@@ -133,6 +133,10 @@ export default class NHTileControl implements IControl {
         return this.tileManager.getTileByID(id)
     }
 
+    getTilesByLevel(level: number) {
+        return this.tileManager.getTilesByLevel(level)
+    }
+
     getTileRenderInfo(tile: Tile) {
 
         const centerInMeter = tile.tileCenter

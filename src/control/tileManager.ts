@@ -66,6 +66,10 @@ export default class TileManager {
         return null
     }
 
+    getTilesByLevel(level: number) {
+        return this.tileInfoList[level].tiles
+    }
+
 
 }
 

@@ -9,7 +9,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import NHLayerGroup from './map/NHLayerGroup'
 import NHTileControl from './control/tileControl'
 import MapTriangleLayer from './map/layers/mapTriangleLayer'
-import StaticGridLayer from './map/layers/staticGridLayer'
+import StaticGridLayer from './map/layers/staticSingleGridLayer'
 
 // DOM Configuration //////////////////////////////////////////////////////////////////////////////////////////////////////
 const root = document.getElementById('app')!
@@ -53,9 +53,11 @@ const map = new mapboxgl.Map({
 	const tileControl = new NHTileControl({
 		baseURL: '/tileServer',
 		tileSize: [512, 512],
+		// tileSize: [666, 999],
 		coordTransformRule: ['EPSG:2326', 'EPSG:4326'],
 		boundaryCondition: [808357.5000000000000000, 824117.5000000000000000, 838897.5000000000000000, 843902.5000000000000000],
 		firstLevelSize: [64, 64],
+		// firstLevelSize: [128, 256],
 		subdivideRules: [
 			[2, 2],
 			[2, 2],
@@ -67,25 +69,24 @@ const map = new mapboxgl.Map({
 	})
 	map.addControl(tileControl)
 
-
 	const layerGroup = new NHLayerGroup({
 		canvas: gpuCanvas,
 		tileControl: tileControl
 	})
 	map.addLayer(layerGroup)
 
+	////////// Layers /////////////////////////////////////////////
+	// const tiles = tileControl.getTilesByLevel(3)
+	// console.log(tiles.map(t=>t.id))
 
-
-	////////// Layers
-	
-	const tile = tileControl.getTileByID('2-1-1')!
+	const tile = tileControl.getTileByID('0-0-0')!
 	layerGroup.addLayer(new StaticGridLayer({ id: 'grid', tile: tile }))
-	
+
 	map.on('click', e => {
 		console.log(e.lngLat)
 	})
 
-	
+
 	// layerGroup.addLayer(new MapTriangleLayer({ id: 'qwss', origin: [114.051537, 22.446937] }))
 	// map.setCenter([120.980697, 31.684162])
 	// map.setZoom(18.5)
