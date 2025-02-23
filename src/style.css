@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: rgb(179, 254, 189); */
+}
+
+#app {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "tiling-nh-grid",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.13",
+    "@types/mapbox-gl": "^3.4.1",
+    "@types/proj4": "^2.5.5",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@webgpu/types": "^0.1.54",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "@mapbox/tilebelt": "^2.0.2",
+    "@tailwindcss/vite": "^4.0.6",
+    "axios": "^1.7.9",
+    "dat.gui": "^0.7.9",
+    "gl-matrix": "^3.4.3",
+    "mapbox-gl": "^3.10.0",
+    "proj4": "^2.15.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.6",
+    "webgpu-utils": "^1.9.4"
+  }
+}
