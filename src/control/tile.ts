@@ -1,5 +1,5 @@
 import BoundingBox2D from "../util/boundingBox2D"
-
+import { bboxPointsTransform } from "../util/spaceTransform"
 ///////////////////////////////////////////////////
 //////////////////// Types ////////////////////////
 ///////////////////////////////////////////////////
@@ -63,6 +63,14 @@ export default class Tile {
     /** `tileCenter` in Meter */
     get tileCenter() {
         return this.tileBBox.center
+    }
+
+    get tilePoints() {
+        return this.tileBBox.points
+    }
+
+    get tilePointsIn4326(){
+        return bboxPointsTransform(this.tileBBox.points)
     }
 
 } 

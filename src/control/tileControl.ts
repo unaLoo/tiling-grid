@@ -141,15 +141,20 @@ export default class NHTileControl implements IControl {
 
         const centerInMeter = tile.tileCenter
         const centerInLngLat = coordTransform(centerInMeter[0], centerInMeter[1])
-        // const centerInLngLat = tile.tileCenter
         const targetMapTile = point2Tile(centerInLngLat[0], centerInLngLat[1], this.map.transform.zoom)
+
+        const cornerPoints = tile.tilePointsIn4326.map((point) => {
+            return lnglat2TileLocalCoord(point as [number, number], targetMapTile)
+        })
 
         const centerInMapTileCoord = lnglat2TileLocalCoord(centerInLngLat as [number, number], targetMapTile)
         const tileMatrix = calcTileMatrix(this.map.transform, targetMapTile)
         const tileUnitToMeter = tileToMeter(targetMapTile, centerInMapTileCoord[1])
 
         return {
+            targetMapTile: targetMapTile,
             mapTileCenter: centerInMapTileCoord,
+            mapTileCornerPoints: cornerPoints,
             mapTile2Meter: tileUnitToMeter,
             mapTileMatrix: tileMatrix
         }
