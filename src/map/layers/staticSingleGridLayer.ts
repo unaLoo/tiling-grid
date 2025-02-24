@@ -49,12 +49,12 @@ export default class StaticGridLayer implements NHCustomLayerInterface {
         const tileSize = this.parent.tileControl.tileSize
         // const tileSize = [1,4] as [number, number]
         const templateGridVertex = genTemplate(tileSize)
-        console.log(templateGridVertex)
+        // console.log(templateGridVertex)
         this.gridRowColNum.x = tileSize[1] // row -- y
         this.gridRowColNum.y = tileSize[0] // col -- x
 
         const templateBuffer = scratch.storageBuffer({
-            name: 'templateBuffer',
+            name: this.id + 'templateBuffer',
             resource: { arrayRef: scratch.aRef(new Float32Array(templateGridVertex)) }
         })
 
@@ -63,12 +63,12 @@ export default class StaticGridLayer implements NHCustomLayerInterface {
 
         // Binding
         const gridBinding = scratch.binding({
-            name: 'gridBinding',
+            name: this.id + 'gridBinding',
             // range: () => [4, tileSize[0] * tileSize[1], 0, 0],
             range: () => [5, tileSize[0] * tileSize[1], 0, 0],
             uniforms: [
                 {
-                    name: 'block',
+                    name: this.id + 'block',
                     dynamic: true,
                     map: {
                         'meter_to_tile': this.meterToTile,
@@ -86,7 +86,7 @@ export default class StaticGridLayer implements NHCustomLayerInterface {
 
         // Pipeline
         const gridPipeline = scratch.renderPipeline({
-            name: 'Pipeline',
+            name: this.id + 'Pipeline',
             shader: { module: gridShaderModule },
             primitive: {
                 // topology: 'triangle-strip',
